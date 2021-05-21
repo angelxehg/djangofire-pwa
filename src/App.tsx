@@ -3,6 +3,7 @@ import { AuthCheck } from 'reactfire';
 
 import LoginPage from './pages/Login';
 import AccountSection from './pages/Account';
+import TokensSection from './pages/Tokens';
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         </p>
       </header>
       <AuthCheck fallback={<LoginPage />}>
+        <TokensSection />
         <AccountSection />
       </AuthCheck>
     </div>
