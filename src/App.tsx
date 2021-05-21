@@ -1,10 +1,13 @@
 import React from 'react';
 
-function App() {
+const App = () => {
   return (
     <div>
       <header>
-        <h1>Hola mundi</h1>
+        <h1>Djangofire v0.1.1</h1>
+        <p>
+          Hola mundo! Creado por <a target="_blank" rel="noopener noreferrer" href="https://angelxehg.github.io">Angel Hurtado</a>
+        </p>
       </header>
     </div>
   );
