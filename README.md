@@ -1,6 +1,6 @@
 # djangofire-pwa
 
-Ejemplo de PWA con Firebase Auth y Django
+PWA de ejemplo de integración de Firebase con Django REST Framework
 
 ## Instalación
 
