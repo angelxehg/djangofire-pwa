@@ -58,3 +58,18 @@ export const createProject = async (item: ProjectFields): Promise<Project> => {
   const body: Project = await res.json();
   return body;
 }
+
+export const deleteProject = async (id: number): Promise<void> => {
+  const headers = await getHeaders();
+  const url = `${apiURL}projects/${id}`;
+  const res = await fetch(url, {
+    method: 'DELETE',
+    headers: headers,
+    redirect: 'follow'
+  });
+  if (res.status !== 204) {
+    console.error(res);
+    throw new Error('Error al eliminar Proyecto');
+  }
+  return;
+}
