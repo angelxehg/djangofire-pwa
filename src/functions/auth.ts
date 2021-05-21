@@ -11,6 +11,15 @@ export const getJWT = async () => {
   return `Bearer ${token}`
 }
 
+export const getHeaders = async (): Promise<Headers> => {
+  const autorization = await getJWT();
+  const headers = new Headers({
+    'Authorization': autorization,
+    'Content-Type': "application/json",
+  });
+  return headers;
+}
+
 export const loginWithGoogle = async () => {
   return await firebase.auth().signInWithPopup(googleProvider);
 }
