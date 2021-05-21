@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { createProject } from '../functions/projects';
+import Card from 'react-bootstrap/Card';
+import { createProject, getCachedProjects, getProjects } from '../functions/projects';
 
 const ProjectsSection = () => {
 
+  const [projectItems, setProjectItems] = useState(getCachedProjects());
   const [inputTitle, setInputTitle] = useState('');
   const [busy, setBusy] = useState(false);
 
@@ -21,12 +23,17 @@ const ProjectsSection = () => {
       });
       console.log(item);
       setInputTitle('');
+      getProjects().then(items => setProjectItems(items));
     } catch (err) {
       alert(err.toString());
       console.error(err);
     }
     setBusy(false);
   }
+
+  useEffect(() => {
+    getProjects().then(items => setProjectItems(items));
+  }, []);
 
   return (
     <section id="projects" className="mt-3">
@@ -43,6 +50,17 @@ const ProjectsSection = () => {
           Guardar
         </Button>
       </Form>
+      {projectItems.map(({ id, title, color }) => {
+        return (
+          <Card key={id} bg={color} text="light" className="mt-2">
+            <Card.Body>
+              <Card.Title className="m-0">
+                {title}
+              </Card.Title>
+            </Card.Body>
+          </Card>
+        )
+      })}
     </section>
   )
 }

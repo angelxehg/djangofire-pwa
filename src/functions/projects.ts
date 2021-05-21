@@ -10,6 +10,38 @@ export interface Project extends ProjectFields {
   id: number;
 }
 
+export const getCachedProjects = (): Project[] => {
+  const data = localStorage.getItem('ALL_PROJECTS');
+  if (!data) {
+    return [];
+  }
+  try {
+    const items: Project[] = JSON.parse(data);
+    return items;
+  } catch (error) {
+    console.error(error);
+    localStorage.removeItem('ALL_PROJECTS');
+    return [];
+  }
+}
+
+export const getProjects = async (): Promise<Project[]> => {
+  const headers = await getHeaders();
+  const url = `${apiURL}projects`;
+  const res = await fetch(url, {
+    method: 'GET',
+    headers: headers,
+    redirect: 'follow'
+  });
+  if (res.status !== 200) {
+    console.error(res);
+    throw new Error('Error al cargar Proyectos');
+  }
+  const body: Project[] = await res.json();
+  localStorage.setItem('ALL_PROJECTS', JSON.stringify(body));
+  return body;
+}
+
 export const createProject = async (item: ProjectFields): Promise<Project> => {
   const headers = await getHeaders();
   const url = `${apiURL}projects/`;
