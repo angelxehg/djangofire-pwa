@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { setTimeout } from 'timers';
 
+import { apiURL } from '../functions/api';
 import { getJWT } from '../functions/auth';
 
 const TokensSection = () => {
@@ -24,6 +25,9 @@ const TokensSection = () => {
   return (
     <section id="tokens" className="mt-3">
       <h2>Tokens</h2>
+      <p>
+        Use el token en una solicitud GET a <a href={apiURL} target="_blank" rel="noopener noreferrer">{apiURL}</a>
+      </p>
       <Button onClick={tokenToClipboard} size="sm" variant="warning" disabled={status !== undefined}>
         {status || 'Copiar a portapapeles'}
       </Button>
