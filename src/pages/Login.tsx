@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import { loginWithGoogle } from '../functions/auth';
 
 const LoginPage = () => (
-  <main>
+  <main className="mt-3">
     <Button onClick={loginWithGoogle}>
       Iniciar sesión con Google
     </Button>

@@ -22,7 +22,7 @@ const TokensSection = () => {
   }
 
   return (
-    <section id="tokens">
+    <section id="tokens" className="mt-3">
       <h2>Tokens</h2>
       <Button onClick={tokenToClipboard} size="sm" variant="warning" disabled={status !== undefined}>
         {status || 'Copiar a portapapeles'}

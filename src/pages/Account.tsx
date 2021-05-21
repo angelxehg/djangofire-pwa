@@ -6,7 +6,7 @@ import { logout } from '../functions/auth';
 const AccountSection = () => {
   const { data: user } = useUser();
   return (
-    <section id="account">
+    <section id="account" className="mt-3">
       <h2>Cuenta</h2>
       <p>{user.displayName} ({user.email})</p>
       <Button onClick={logout} size="sm" variant="danger">
