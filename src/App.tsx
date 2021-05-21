@@ -2,7 +2,7 @@ import React from 'react';
 
 const App = () => {
   return (
-    <div>
+    <div className="container-fluid pt-3 pb-3">
       <header>
         <h1>Djangofire v0.1.1</h1>
         <p>
