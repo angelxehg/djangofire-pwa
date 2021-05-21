@@ -2,7 +2,7 @@ import React from 'react';
 import { AuthCheck } from 'reactfire';
 
 import LoginPage from './pages/Login';
-import HomePage from './pages/Home';
+import AccountSection from './pages/Account';
 
 const App = () => {
   return (
@@ -14,7 +14,7 @@ const App = () => {
         </p>
       </header>
       <AuthCheck fallback={<LoginPage />}>
-        <HomePage />
+        <AccountSection />
       </AuthCheck>
     </div>
   );

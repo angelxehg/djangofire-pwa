@@ -3,16 +3,17 @@ import Button from 'react-bootstrap/Button';
 import { useUser } from 'reactfire';
 import { logout } from '../functions/auth';
 
-const HomePage = () => {
+const AccountSection = () => {
   const { data: user } = useUser();
   return (
-    <main>
-      Ya inició sesión como {user.displayName}
+    <section id="account">
+      <h2>Cuenta</h2>
+      <p>{user.displayName} ({user.email})</p>
       <Button onClick={logout} size="sm" variant="danger">
         Cerrar sesión
       </Button>
-    </main>
+    </section>
   )
 }
 
-export default HomePage;
+export default AccountSection;
