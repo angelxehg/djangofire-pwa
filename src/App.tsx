@@ -1,4 +1,8 @@
 import React from 'react';
+import { AuthCheck } from 'reactfire';
+
+import LoginPage from './pages/Login';
+import HomePage from './pages/Home';
 
 const App = () => {
   return (
@@ -9,6 +13,9 @@ const App = () => {
           Hola mundo! Creado por <a target="_blank" rel="noopener noreferrer" href="https://angelxehg.github.io">Angel Hurtado</a>
         </p>
       </header>
+      <AuthCheck fallback={<LoginPage />}>
+        <HomePage />
+      </AuthCheck>
     </div>
   );
 }
