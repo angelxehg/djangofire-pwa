@@ -16,6 +16,8 @@ Utilice estos comandos para clonar e instalar la aplicación:
   - Configurar Google como [método de acceso](https://firebase.google.com/docs/auth/web/google-signin#before_you_begin)
   - Configurar [dominios autorizados](https://support.google.com/firebase/answer/6400741)
 
+- Crear una API REST con [djangofire-api](https://github.com/angelxehg/djangofire-api), la cual deberá estar configurada y desplegada en Heroku.
+
 - Configurar variables en un archivo `.env.local`
 
 ```env
@@ -25,7 +27,10 @@ REACT_APP_FIREBASE_PROJECT_ID=
 REACT_APP_FIREBASE_STORAGE_BUCKET=
 REACT_APP_FIREBASE_MESSAGE_SENDER_ID=
 REACT_APP_FIREBASE_APP_ID=
+REACT_APP_DJANGOFIRE_API=
 ```
+
+NOTA: El formato de `REACT_APP_DJANGOFIRE_API` debe ser como el siguiente: `https://[APP].herokuapp.com/api/v1/`
 
 NOTA: Estas variables tambien se deberán configurar en el entorno de producción, ya sea con un archivo `.env.production`, o en [Netlify](https://docs.netlify.com/configure-builds/environment-variables/)
 
