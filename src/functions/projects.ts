@@ -59,6 +59,23 @@ export const createProject = async (item: ProjectFields): Promise<Project> => {
   return body;
 }
 
+export const updateProject = async (id: number, item: ProjectFields): Promise<Project> => {
+  const headers = await getHeaders();
+  const url = `${apiURL}projects/${id}`;
+  const res = await fetch(url, {
+    method: 'PATCH',
+    headers: headers,
+    body: JSON.stringify(item),
+    redirect: 'follow'
+  });
+  if (res.status !== 200) {
+    console.error(res);
+    throw new Error('Error al actualizar Proyecto');
+  }
+  const body: Project = await res.json();
+  return body;
+}
+
 export const deleteProject = async (id: number): Promise<void> => {
   const headers = await getHeaders();
   const url = `${apiURL}projects/${id}`;
