@@ -2,7 +2,36 @@ import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
-import { createProject, deleteProject, getCachedProjects, getProjects } from '../functions/projects';
+import { createProject, deleteProject, getCachedProjects, getProjects, Project } from '../functions/projects';
+
+interface ProjectCardProps {
+  project: Project
+  busy: boolean
+  onDelete: (id: number) => Promise<void>
+}
+
+const ProjectCard = (props: ProjectCardProps) => {
+  const { busy, onDelete } = props;
+  const { id, title, color } = props.project;
+  return (
+    <Card key={id} border={color} className="mt-2">
+      <Card.Body>
+        <div className="row">
+          <div className="col">
+            <Card.Title className="m-0">
+              {title}
+            </Card.Title>
+          </div>
+          <div className="col-auto">
+            <Button type="submit" variant="danger" size="sm" disabled={busy} onClick={() => onDelete(id)}>
+              Eliminar
+            </Button>
+          </div>
+        </div>
+      </Card.Body>
+    </Card>
+  )
+}
 
 const ProjectsSection = () => {
 
@@ -30,6 +59,18 @@ const ProjectsSection = () => {
     setBusy(false);
   }
 
+  const handleDelete = async (id: number) => {
+    setBusy(true);
+    try {
+      await deleteProject(id);
+      getProjects().then(items => setProjectItems(items));
+    } catch (err) {
+      alert(err.toString());
+      console.error(err);
+    }
+    setBusy(false);
+  }
+
   useEffect(() => {
     getProjects().then(items => setProjectItems(items));
   }, []);
@@ -46,36 +87,9 @@ const ProjectsSection = () => {
           Guardar
         </Button>
       </Form>
-      {projectItems.map(({ id, title, color }) => {
-        return (
-          <Card key={id} border={color} className="mt-2">
-            <Card.Body>
-              <div className="row">
-                <div className="col">
-                  <Card.Title className="m-0">
-                    {title}
-                  </Card.Title>
-                </div>
-                <div className="col-auto">
-                  <Button type="submit" variant="danger" size="sm" disabled={busy} onClick={async () => {
-                    setBusy(true);
-                    try {
-                      await deleteProject(id);
-                      getProjects().then(items => setProjectItems(items));
-                    } catch (err) {
-                      alert(err.toString());
-                      console.error(err);
-                    }
-                    setBusy(false);
-                  }}>
-                    Eliminar
-                  </Button>
-                </div>
-              </div>
-            </Card.Body>
-          </Card>
-        )
-      })}
+      {projectItems.map(project => (
+        <ProjectCard key={project.id} project={project} busy={busy} onDelete={handleDelete} />
+      ))}
     </section>
   )
 }
